@@ -16,12 +16,31 @@ int64_t max_pairwise_product(vector<int>& numbers){
 		for (int second = first + 1; second < n; ++second){
 			max_product = std::max(
 					max_product, 
-					(int64_t) numbers[first] * numbers[second]
-					);
+					int64_t(numbers[first]) * numbers[second]
+                    );
 		}
 	}
 	return max_product;
 }
+
+
+
+int64_t max_pairwise_product_fast(vector<int>& numbers){
+	int n = numbers.size();
+
+    int max_index1 = 0;
+	for (int i = 0; i < n; ++i)
+        if (numbers[i] > numbers[max_index1])
+            max_index1 = i;
+   
+    int max_index2 = 0;
+	for (int i = 0; i < n; ++i)
+        if (i != max_index1 && numbers[i] > numbers[max_index2])
+            max_index2 = i;
+
+	return int64_t(numbers[max_index1]) * numbers[max_index2];
+}
+
 
 
 int main(){
@@ -31,6 +50,6 @@ int main(){
 	for (int i = 0; i < n; i++)
 		cin >> input_numbers[i];
 
-	cout << max_pairwise_product(input_numbers) << endl; 
+	cout << max_pairwise_product_fast(input_numbers) << endl; 
     return 0;
 }
