@@ -33,9 +33,10 @@ int64_t max_pairwise_product_fast(vector<int>& numbers){
         if (numbers[i] > numbers[max_index1])
             max_index1 = i;
    
-    int max_index2 = 0;
+    int max_index2 = -1;
 	for (int i = 0; i < n; ++i)
-        if (i != max_index1 && numbers[i] > numbers[max_index2])
+        if (i != max_index1 
+                && (max_index2 == -1 || numbers[i] > numbers[max_index2]))
             max_index2 = i;
 
 	return int64_t(numbers[max_index1]) * numbers[max_index2];
